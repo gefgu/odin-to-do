@@ -5,3 +5,7 @@
 // appController - controls the application logic.
 // appUIProvider - controls the UI.
 // appInterfacer - controls calls between appController and appUIProvider.
+
+import appUiProvider from "./app-ui-provider";
+
+appUiProvider.makeHeading();
