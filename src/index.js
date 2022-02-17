@@ -8,4 +8,4 @@
 
 import appUiProvider from "./app-ui-provider";
 
-appUiProvider.makeHeading();
+appUiProvider.buildUI();
