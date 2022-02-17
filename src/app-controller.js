@@ -11,5 +11,9 @@ export default (() => {
     tasks.splice(0, 0, todoFactory(title, description, dueDate, priority));
   };
 
+  const removeToDo = (index) => {
+    tasks.splice(index, 1);
+  }
+
   return { getToDos, addToDo };
 })();
