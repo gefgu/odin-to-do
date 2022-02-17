@@ -1,1 +1,1 @@
-(()=>{"use strict";(()=>{const e=document.createElement("h1");e.textContent="To Do App",document.querySelector("body").appendChild(e)})()})();
+(()=>{"use strict";(()=>{(()=>{const e=document.createElement("h1");e.textContent="To Do App",document.querySelector("body").appendChild(e)})()})(),console.log("ABc")})();
