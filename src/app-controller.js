@@ -1,7 +1,7 @@
 import todoFactory from "./todo-factory.js";
 
 export default (() => {
-  let tasks = [];
+  let tasks = [todoFactory("First Todo", "Info", "Tomorrow", "A")];
 
   const getToDos = () => {
     return tasks;

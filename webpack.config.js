@@ -8,6 +8,7 @@ module.exports = {
       title: "Todo App",
     }),
   ],
+  devtool: "inline-source-map",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),

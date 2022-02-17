@@ -3,7 +3,7 @@ import appController from "./app-controller.js";
 
 export default (() => {
   const startApp = () => {
-    appUIProvider.buildUI();
+    appUIProvider.buildUI(appController.getToDos);
   };
 
   return { startApp };
