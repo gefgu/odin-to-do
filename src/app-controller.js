@@ -15,5 +15,5 @@ export default (() => {
     toDos.splice(index, 1);
   }
 
-  return { getToDos, addToDo };
+  return { getToDos, addToDo, removeToDo };
 })();
