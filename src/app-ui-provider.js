@@ -6,7 +6,7 @@ export default (() => {
 
   const makeHeading = () => {
     const heading = document.createElement("h1");
-    heading.textContent = "To Do App";
+    heading.textContent = "Inbox";
     page.appendChild(heading);
   };
 
