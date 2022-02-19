@@ -7,5 +7,6 @@
 // appInterfacer - controls calls between appController and appUIProvider.
 
 import appInterfacer from "./app-interfacer.js";
+import "./style.css";
 
 appInterfacer.startApp();
