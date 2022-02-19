@@ -13,7 +13,7 @@ export default (() => {
 
   const removeToDo = (index) => {
     toDos.splice(index, 1);
-  }
+  };
 
   const editToDo = (index, title, description, dueDate, priority) => {
     toDos.splice(index, 1, todoFactory(title, description, dueDate, priority));

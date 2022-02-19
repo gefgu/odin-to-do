@@ -1,12 +1,15 @@
-export default function projectFactory(todoList) {
+export default function projectFactory(name) {
+  let toDoList = [];
+
   const getToDos = () => {
-    return todoList;
+    return toDoList;
   };
   const addToDo = (newToDo) => {
-    todoList.splice(0, 0, newToDo);
+    toDoList.splice(0, 0, newToDo);
   };
   const deleteToDo = (indexOfToDo) => {
-    todoList.splice(indexOfToDo, 1);
+    toDoList.splice(indexOfToDo, 1);
   };
-  return {getToDos, addToDo, deleteToDo}
+  const getName = () => name;
+  return { getName, getToDos, addToDo, deleteToDo };
 }
