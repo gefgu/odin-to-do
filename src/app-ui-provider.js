@@ -4,6 +4,7 @@ export default (() => {
   let addToDoFunction = null;
   let removeToDoFunction = null;
   let editToDoFunction = null;
+  let currentProject = "inbox";
 
   const makeHeading = () => {
     const container = document.createElement("div");
@@ -78,10 +79,25 @@ export default (() => {
     return button;
   };
   const buildUI = (getFunction, addFunction, removeFunction, editFunction) => {
-    getToDosFunction = getFunction;
-    addToDoFunction = addFunction;
-    removeToDoFunction = removeFunction;
-    editToDoFunction = editFunction;
+    getToDosFunction = () => {
+      return getFunction(currentProject);
+    };
+    addToDoFunction = (title, description, dueDate, priority) => {
+      addFunction(currentProject, title, description, dueDate, priority);
+    };
+    removeToDoFunction = (index) => {
+      removeFunction(currentProject, index);
+    };
+    editToDoFunction = (index, title, description, dueDate, priority) => {
+      editFunction(
+        currentProject,
+        index,
+        title,
+        description,
+        dueDate,
+        priority
+      );
+    };
     makeHeading();
     page.appendChild(addToDoButton());
     showToDos();
