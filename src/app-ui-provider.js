@@ -5,9 +5,12 @@ export default (() => {
   let removeToDoFunction = null;
 
   const makeHeading = () => {
+    const container = document.createElement("div");
+    container.classList.add("heading");
     const heading = document.createElement("h1");
     heading.textContent = "Inbox";
-    page.appendChild(heading);
+    container.appendChild(heading);
+    page.appendChild(container);
   };
 
   const createToDoElement = (toDo, index, container) => {
