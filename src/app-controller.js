@@ -15,5 +15,9 @@ export default (() => {
     toDos.splice(index, 1);
   }
 
-  return { getToDos, addToDo, removeToDo };
+  const editToDo = (index, title, description, dueDate, priority) => {
+    toDos.splice(index, 1, todoFactory(title, description, dueDate, priority));
+  };
+
+  return { getToDos, addToDo, removeToDo, editToDo };
 })();

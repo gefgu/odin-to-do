@@ -3,7 +3,12 @@ import appController from "./app-controller.js";
 
 export default (() => {
   const startApp = () => {
-    appUIProvider.buildUI(appController.getToDos, appController.addToDo, appController.removeToDo);
+    appUIProvider.buildUI(
+      appController.getToDos,
+      appController.addToDo,
+      appController.removeToDo,
+      appController.editToDo
+    );
   };
 
   return { startApp };

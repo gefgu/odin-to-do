@@ -3,6 +3,7 @@ export default (() => {
   let getToDosFunction = null;
   let addToDoFunction = null;
   let removeToDoFunction = null;
+  let editToDoFunction = null;
 
   const makeHeading = () => {
     const container = document.createElement("div");
@@ -22,6 +23,7 @@ export default (() => {
       toDoContainer.appendChild(element);
     });
 
+    toDoContainer.appendChild(editToDoButton(index));
     toDoContainer.appendChild(removeToDoButton(index));
     container.appendChild(toDoContainer);
   };
@@ -52,19 +54,34 @@ export default (() => {
     });
     return button;
   };
+  const editToDoButton = (index) => {
+    const toDos = getToDosFunction();
+    const button = document.createElement("button");
+    button.textContent = "Edit";
+    button.addEventListener("click", () => {
+      const title = prompt("Title:", toDos[index].title);
+      const description = prompt("Description:", toDos[index].description);
+      const dueDate = prompt("Due Date:", toDos[index].dueDate);
+      const priority = prompt("Priority:", toDos[index].priority);
+      editToDoFunction(index, title, description, dueDate, priority);
+      showToDos();
+    });
+    return button;
+  };
   const removeToDoButton = (index) => {
     const button = document.createElement("button");
-    button.textContent = "Remove ToDo";
+    button.textContent = "Remove To-Do";
     button.addEventListener("click", () => {
       removeToDoFunction(index);
       showToDos();
     });
     return button;
   };
-  const buildUI = (getFunction, addFunction, removeFunction) => {
+  const buildUI = (getFunction, addFunction, removeFunction, editFunction) => {
     getToDosFunction = getFunction;
     addToDoFunction = addFunction;
     removeToDoFunction = removeFunction;
+    editToDoFunction = editFunction;
     makeHeading();
     page.appendChild(addToDoButton());
     showToDos();
