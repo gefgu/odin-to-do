@@ -16,7 +16,7 @@ export default (() => {
   const createToDoElement = (toDo, index, container) => {
     const toDoContainer = document.createElement("div");
 
-    Object.keys(toDo).forEach(propertyName => {
+    Object.keys(toDo).forEach((propertyName) => {
       const element = document.createElement("p");
       element.textContent = toDo[propertyName];
       toDoContainer.appendChild(element);
@@ -43,7 +43,11 @@ export default (() => {
     const button = document.createElement("button");
     button.textContent = "Add ToDo";
     button.addEventListener("click", () => {
-      addToDoFunction("Adding Task", "Info", "Tomorrow", "A");
+      const title = prompt("Title:");
+      const description = prompt("Description:");
+      const dueDate = prompt("Due Date:");
+      const priority = prompt("Priority:");
+      addToDoFunction(title, description, dueDate, priority);
       showToDos();
     });
     return button;
