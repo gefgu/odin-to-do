@@ -5,6 +5,7 @@
 .to-do-list > div {
   display: flex;
   margin: 32px 0;
+  gap: 32px;
 }
 
 .to-do-list > div > * {
