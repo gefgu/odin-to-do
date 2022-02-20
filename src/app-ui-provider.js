@@ -98,6 +98,18 @@ export default (() => {
     return button;
   };
 
+  const createEditProjectButton = () => {
+    const button = document.createElement("button");
+    button.textContent = `Edit '${currentProject}' project name`;
+    button.addEventListener("click", () => {
+      const newName = prompt("New Name:", currentProject);
+      editProjectNameFunction(currentProject, newName)
+      currentProject = newName;
+      createPageElements();
+    });
+    return button;
+  };
+
   const createChangeProjectElements = () => {
     const container = document.createElement("div");
     const label = document.createElement("label");
@@ -126,8 +138,9 @@ export default (() => {
   const createPageElements = () => {
     cleanPage();
     makeHeading();
-    page.appendChild(createDeleteProjectButton());
     page.appendChild(createChangeProjectElements());
+    page.appendChild(createDeleteProjectButton());
+    page.appendChild(createEditProjectButton());
     page.appendChild(addToDoButton());
     showToDos();
   };
