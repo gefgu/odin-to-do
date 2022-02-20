@@ -5,9 +5,10 @@ export default (() => {
   const startApp = () => {
     appUIProvider.buildUI(
       appController.getToDos,
+      appController.getProjectNames,
       appController.addToDo,
       appController.removeToDo,
-      appController.editToDo
+      appController.editToDo,
     );
   };
 

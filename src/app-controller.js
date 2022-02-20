@@ -9,6 +9,10 @@ export default (() => {
   projects.inbox.addToDo(todoFactory("First Todo", "Info", "Tomorrow", "A"));
   projects.home.addToDo(todoFactory("Home To-Do", "Info", "Next Week", "A"));
 
+  const getProjectNames = () => {
+    return Object.keys(projects);
+  }
+
   const getToDos = (projectName) => {
     return projects[projectName].getToDos();
   };
@@ -36,5 +40,5 @@ export default (() => {
       .splice(index, 1, todoFactory(title, description, dueDate, priority));
   };
 
-  return { getToDos, addToDo, removeToDo, editToDo };
+  return { getProjectNames, getToDos, addToDo, removeToDo, editToDo };
 })();

@@ -1,9 +1,10 @@
 export default (() => {
   const page = document.querySelector("body");
-  let getToDosFunction = null;
+  let getToDosFromProject = null;
   let addToDoFunction = null;
   let removeToDoFunction = null;
   let editToDoFunction = null;
+  let getProjectNamesFunction = null;
   let currentProject = "inbox";
 
   const makeHeading = () => {
@@ -28,6 +29,7 @@ export default (() => {
     toDoContainer.appendChild(removeToDoButton(index));
     container.appendChild(toDoContainer);
   };
+
   const showToDos = () => {
     const className = "to-do-list";
     const oldContainer = page.querySelector(`.${className}`);
@@ -37,11 +39,12 @@ export default (() => {
 
     const container = document.createElement("div");
     container.classList.add(className);
-    getToDosFunction().forEach((toDo, index) =>
+    getToDosFromProject().forEach((toDo, index) =>
       createToDoElement(toDo, index, container)
     );
     page.appendChild(container);
   };
+
   const addToDoButton = () => {
     const button = document.createElement("button");
     button.textContent = "Add ToDo";
@@ -55,8 +58,9 @@ export default (() => {
     });
     return button;
   };
+
   const editToDoButton = (index) => {
-    const toDos = getToDosFunction();
+    const toDos = getToDosFromProject();
     const button = document.createElement("button");
     button.textContent = "Edit";
     button.addEventListener("click", () => {
@@ -69,6 +73,7 @@ export default (() => {
     });
     return button;
   };
+
   const removeToDoButton = (index) => {
     const button = document.createElement("button");
     button.textContent = "Remove To-Do";
@@ -79,21 +84,50 @@ export default (() => {
     return button;
   };
 
+  const createChangeProjectElements = () => {
+    const container = document.createElement("div");
+    const label = document.createElement("label");
+    label.textContent = "Choose Project:";
+    const select = document.createElement("select");
+    getProjectNamesFunction().forEach((projectName) => {
+      const option = document.createElement("option");
+      option.value = projectName;
+      option.textContent = projectName;
+      select.appendChild(option);
+    });
+    select.addEventListener("change", (event) => {
+      currentProject = event.target.value;
+      createPageElements();
+    })
+    select.value = currentProject;
+    container.appendChild(label);
+    container.appendChild(select);
+    return container;
+  };
+
   const cleanPage = () => {
-    page.childNodes.forEach((elem) => elem.remove());
+    page.textContent = "";
   };
 
   const createPageElements = () => {
     cleanPage();
     makeHeading();
     page.appendChild(addToDoButton());
+    page.appendChild(createChangeProjectElements());
     showToDos();
   };
 
-  const buildUI = (getFunction, addFunction, removeFunction, editFunction) => {
-    getToDosFunction = () => {
-      return getFunction(currentProject);
+  const buildUI = (
+    getToDoFunction,
+    getProjectNames,
+    addFunction,
+    removeFunction,
+    editFunction
+  ) => {
+    getToDosFromProject = () => {
+      return getToDoFunction(currentProject);
     };
+    getProjectNamesFunction = getProjectNames;
     addToDoFunction = (title, description, dueDate, priority) => {
       addFunction(currentProject, title, description, dueDate, priority);
     };
