@@ -103,8 +103,20 @@ export default (() => {
     button.textContent = `Edit '${currentProject}' project name`;
     button.addEventListener("click", () => {
       const newName = prompt("New Name:", currentProject);
-      editProjectNameFunction(currentProject, newName)
+      editProjectNameFunction(currentProject, newName);
       currentProject = newName;
+      createPageElements();
+    });
+    return button;
+  };
+
+  const createAddProjectButton = () => {
+    const button = document.createElement("button");
+    button.textContent = "Add Project";
+    button.addEventListener("click", () => {
+      const name = prompt("Name");
+      addProjectFunction(name);
+      currentProject = name;
       createPageElements();
     });
     return button;
@@ -138,9 +150,10 @@ export default (() => {
   const createPageElements = () => {
     cleanPage();
     makeHeading();
-    page.appendChild(createChangeProjectElements());
-    page.appendChild(createDeleteProjectButton());
+    page.appendChild(createAddProjectButton());
     page.appendChild(createEditProjectButton());
+    page.appendChild(createDeleteProjectButton());
+    page.appendChild(createChangeProjectElements());
     page.appendChild(addToDoButton());
     showToDos();
   };
