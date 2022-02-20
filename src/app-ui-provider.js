@@ -87,6 +87,17 @@ export default (() => {
     return button;
   };
 
+  const createDeleteProjectButton = () => {
+    const button = document.createElement("button");
+    button.textContent = `Delete '${currentProject}' project`;
+    button.addEventListener("click", () => {
+      deleteProjectFunction(currentProject);
+      currentProject = getProjectNamesFunction()[0];
+      createPageElements();
+    });
+    return button;
+  };
+
   const createChangeProjectElements = () => {
     const container = document.createElement("div");
     const label = document.createElement("label");
@@ -115,8 +126,9 @@ export default (() => {
   const createPageElements = () => {
     cleanPage();
     makeHeading();
-    page.appendChild(addToDoButton());
+    page.appendChild(createDeleteProjectButton());
     page.appendChild(createChangeProjectElements());
+    page.appendChild(addToDoButton());
     showToDos();
   };
 
