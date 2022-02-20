@@ -78,6 +78,18 @@ export default (() => {
     });
     return button;
   };
+
+  const cleanPage = () => {
+    page.childNodes.forEach((elem) => elem.remove());
+  };
+
+  const createPageElements = () => {
+    cleanPage();
+    makeHeading();
+    page.appendChild(addToDoButton());
+    showToDos();
+  };
+
   const buildUI = (getFunction, addFunction, removeFunction, editFunction) => {
     getToDosFunction = () => {
       return getFunction(currentProject);
@@ -98,9 +110,8 @@ export default (() => {
         priority
       );
     };
-    makeHeading();
-    page.appendChild(addToDoButton());
-    showToDos();
+
+    createPageElements();
   };
   return { buildUI };
 })();
