@@ -11,7 +11,20 @@ export default (() => {
 
   const getProjectNames = () => {
     return Object.keys(projects);
-  }
+  };
+
+  const addProject = (projectName) => {
+    projects[projectName] = projectFactory(projectName);
+  };
+
+  const editProjectName = (oldProjectName, newProjectName) => {
+    projects[newProjectName] = projects[oldProjectName];
+    delete projects[oldProjectName];
+  };
+
+  const deleteProject = (projectName) => {
+    delete projects[projectName];
+  };
 
   const getToDos = (projectName) => {
     return projects[projectName].getToDos();
@@ -40,5 +53,14 @@ export default (() => {
       .splice(index, 1, todoFactory(title, description, dueDate, priority));
   };
 
-  return { getProjectNames, getToDos, addToDo, removeToDo, editToDo };
+  return {
+    getProjectNames,
+    addProject,
+    editProjectName,
+    deleteProject,
+    getToDos,
+    addToDo,
+    removeToDo,
+    editToDo,
+  };
 })();
