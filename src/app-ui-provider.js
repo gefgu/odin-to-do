@@ -14,7 +14,7 @@ export default (() => {
     const container = document.createElement("div");
     container.classList.add("heading");
     const heading = document.createElement("h1");
-    heading.textContent = "Inbox";
+    heading.textContent = currentProject.toUpperCase();
     container.appendChild(heading);
     page.appendChild(container);
   };
