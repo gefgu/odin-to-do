@@ -5,6 +5,9 @@ export default (() => {
   let removeToDoFunction = null;
   let editToDoFunction = null;
   let getProjectNamesFunction = null;
+  let addProjectFunction = null;
+  let editProjectNameFunction = null;
+  let deleteProjectFunction = null;
   let currentProject = "inbox";
 
   const makeHeading = () => {
@@ -98,7 +101,7 @@ export default (() => {
     select.addEventListener("change", (event) => {
       currentProject = event.target.value;
       createPageElements();
-    })
+    });
     select.value = currentProject;
     container.appendChild(label);
     container.appendChild(select);
@@ -118,16 +121,22 @@ export default (() => {
   };
 
   const buildUI = (
-    getToDoFunction,
     getProjectNames,
+    addProject,
+    editProject,
+    deleteProject,
+    getToDoFunction,
     addFunction,
     removeFunction,
     editFunction
   ) => {
+    getProjectNamesFunction = getProjectNames;
+    addProjectFunction = addProject;
+    editProjectNameFunction = editProject;
+    deleteProjectFunction = deleteProject;
     getToDosFromProject = () => {
       return getToDoFunction(currentProject);
     };
-    getProjectNamesFunction = getProjectNames;
     addToDoFunction = (title, description, dueDate, priority) => {
       addFunction(currentProject, title, description, dueDate, priority);
     };
