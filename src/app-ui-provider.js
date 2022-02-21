@@ -8,7 +8,7 @@ export default (() => {
   let addProjectFunction = null;
   let editProjectNameFunction = null;
   let deleteProjectFunction = null;
-  let currentProject = "inbox";
+  let currentProject = null;
 
   const makeHeading = () => {
     const container = document.createElement("div");
@@ -191,6 +191,7 @@ export default (() => {
         priority
       );
     };
+    currentProject = getProjectNamesFunction()[0];
 
     createPageElements();
   };

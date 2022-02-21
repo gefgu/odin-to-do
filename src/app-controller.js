@@ -2,12 +2,7 @@ import todoFactory from "./todo-factory.js";
 import projectFactory from "./project-factory.js";
 
 export default (() => {
-  let projects = {
-    inbox: projectFactory("inbox"),
-    home: projectFactory("home"),
-  };
-  projects.inbox.addToDo(todoFactory("First Todo", "Info", "Tomorrow", "A"));
-  projects.home.addToDo(todoFactory("Home To-Do", "Info", "Next Week", "A"));
+  let projects = {};
 
   const getProjectNames = () => {
     return Object.keys(projects);
@@ -15,15 +10,20 @@ export default (() => {
 
   const addProject = (projectName) => {
     projects[projectName] = projectFactory(projectName);
+    saveData();
   };
 
   const editProjectName = (oldProjectName, newProjectName) => {
     projects[newProjectName] = projects[oldProjectName];
     delete projects[oldProjectName];
+    localStorage.removeItem(oldProjectName);
+    saveData();
   };
 
   const deleteProject = (projectName) => {
     delete projects[projectName];
+    localStorage.removeItem(projectName);
+    saveData();
   };
 
   const getToDos = (projectName) => {
@@ -34,10 +34,12 @@ export default (() => {
     projects[projectName]
       .getToDos()
       .splice(0, 0, todoFactory(title, description, dueDate, priority));
+    saveData();
   };
 
   const removeToDo = (projectName, index) => {
     projects[projectName].getToDos().splice(index, 1);
+    saveData();
   };
 
   const editToDo = (
@@ -51,7 +53,25 @@ export default (() => {
     projects[projectName]
       .getToDos()
       .splice(index, 1, todoFactory(title, description, dueDate, priority));
+    saveData();
   };
+
+  const saveData = () => {
+    getProjectNames().forEach((projectName) => {
+      localStorage[projectName] = JSON.stringify(getToDos(projectName));
+    });
+  };
+
+  const getSavedData = () => {
+    Object.keys(localStorage).forEach(projectName => {
+      const project = projectFactory(projectName);
+      const toDos = JSON.parse(localStorage[projectName]);
+      toDos.forEach(toDo => project.addToDo(toDo));
+      projects[projectName] = project;
+    })
+  };
+
+  getSavedData();
 
   return {
     getProjectNames,
