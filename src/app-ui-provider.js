@@ -10,13 +10,13 @@ export default (() => {
   let deleteProjectFunction = null;
   let currentProject = null;
 
-  const makeHeading = () => {
+  const createHeading = () => {
     const container = document.createElement("div");
     container.classList.add("heading");
     const heading = document.createElement("h1");
     heading.textContent = currentProject.toUpperCase();
     container.appendChild(heading);
-    page.appendChild(container);
+    return container;
   };
 
   const createToDoElement = (toDo, index, container) => {
@@ -33,7 +33,7 @@ export default (() => {
     container.appendChild(toDoContainer);
   };
 
-  const showToDos = () => {
+  const createToDosElements = () => {
     const className = "to-do-list";
     const oldContainer = page.querySelector(`.${className}`);
     if (oldContainer) {
@@ -45,10 +45,10 @@ export default (() => {
     getToDosFromProject().forEach((toDo, index) =>
       createToDoElement(toDo, index, container)
     );
-    page.appendChild(container);
+    return container;
   };
 
-  const addToDoButton = () => {
+  const createAddToDoButton = () => {
     const button = document.createElement("button");
     button.textContent = "Add ToDo";
     button.addEventListener("click", () => {
@@ -57,7 +57,7 @@ export default (() => {
       const dueDate = prompt("Due Date:");
       const priority = prompt("Priority:");
       addToDoFunction(title, description, dueDate, priority);
-      showToDos();
+      refreshPageElements();
     });
     return button;
   };
@@ -72,7 +72,7 @@ export default (() => {
       const dueDate = prompt("Due Date:", toDos[index].dueDate);
       const priority = prompt("Priority:", toDos[index].priority);
       editToDoFunction(index, title, description, dueDate, priority);
-      showToDos();
+      refreshPageElements();
     });
     return button;
   };
@@ -82,7 +82,7 @@ export default (() => {
     button.textContent = "Remove To-Do";
     button.addEventListener("click", () => {
       removeToDoFunction(index);
-      showToDos();
+      refreshPageElements();
     });
     return button;
   };
@@ -93,7 +93,7 @@ export default (() => {
     button.addEventListener("click", () => {
       deleteProjectFunction(currentProject);
       currentProject = getProjectNamesFunction()[0];
-      createPageElements();
+      refreshPageElements();
     });
     return button;
   };
@@ -105,7 +105,7 @@ export default (() => {
       const newName = prompt("New Name:", currentProject);
       editProjectNameFunction(currentProject, newName);
       currentProject = newName;
-      createPageElements();
+      refreshPageElements();
     });
     return button;
   };
@@ -117,7 +117,7 @@ export default (() => {
       const name = prompt("Name");
       addProjectFunction(name);
       currentProject = name;
-      createPageElements();
+      refreshPageElements();
     });
     return button;
   };
@@ -135,7 +135,7 @@ export default (() => {
     });
     select.addEventListener("change", (event) => {
       currentProject = event.target.value;
-      createPageElements();
+      refreshPageElements();
     });
     select.value = currentProject;
     container.appendChild(label);
@@ -143,19 +143,33 @@ export default (() => {
     return container;
   };
 
+  const createSideBar = () => {
+    const sidebar = document.createElement("div");
+    sidebar.classList.add("sidebar");
+    sidebar.appendChild(createAddProjectButton());
+    sidebar.appendChild(createEditProjectButton());
+    sidebar.appendChild(createDeleteProjectButton());
+    sidebar.appendChild(createChangeProjectElements());
+    return sidebar;
+  };
+
+  const mainContent = () => {
+    const content = document.createElement("div");
+    content.classList.add("content");
+    content.appendChild(createHeading());
+    content.appendChild(createAddToDoButton());
+    content.appendChild(createToDosElements());
+    return content;
+  };
+
   const cleanPage = () => {
     page.textContent = "";
   };
 
-  const createPageElements = () => {
+  const refreshPageElements = () => {
     cleanPage();
-    makeHeading();
-    page.appendChild(createAddProjectButton());
-    page.appendChild(createEditProjectButton());
-    page.appendChild(createDeleteProjectButton());
-    page.appendChild(createChangeProjectElements());
-    page.appendChild(addToDoButton());
-    showToDos();
+    page.appendChild(createSideBar());
+    page.appendChild(mainContent());
   };
 
   const buildUI = (
@@ -193,7 +207,7 @@ export default (() => {
     };
     currentProject = getProjectNamesFunction()[0];
 
-    createPageElements();
+    refreshPageElements();
   };
   return { buildUI };
 })();
