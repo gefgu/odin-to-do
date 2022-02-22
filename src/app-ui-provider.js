@@ -87,29 +87,7 @@ export default (() => {
     return button;
   };
 
-  const createDeleteProjectButton = () => {
-    const button = document.createElement("button");
-    button.textContent = `Delete '${currentProject}' project`;
-    button.addEventListener("click", () => {
-      deleteProjectFunction(currentProject);
-      currentProject = getProjectNamesFunction()[0];
-      refreshPageElements();
-    });
-    return button;
-  };
-
-  const createEditProjectButton = () => {
-    const button = document.createElement("button");
-    button.textContent = `Edit '${currentProject}' project name`;
-    button.addEventListener("click", () => {
-      const newName = prompt("New Name:", currentProject);
-      editProjectNameFunction(currentProject, newName);
-      currentProject = newName;
-      refreshPageElements();
-    });
-    return button;
-  };
-
+  
   const createAddProjectButton = () => {
     const button = document.createElement("button");
     button.textContent = "Add Project";
@@ -122,34 +100,46 @@ export default (() => {
     return button;
   };
 
-  const createChangeProjectElements = () => {
-    const container = document.createElement("div");
-    const label = document.createElement("label");
-    label.textContent = "Choose Project:";
-    const select = document.createElement("select");
+  const addProjectsListing = () => {
+    const projectList = document.createElement("div");
     getProjectNamesFunction().forEach((projectName) => {
-      const option = document.createElement("option");
-      option.value = projectName;
-      option.textContent = projectName;
-      select.appendChild(option);
+      const projectDiv = document.createElement("div");
+
+      const name = document.createElement("span");
+      name.textContent = projectName;
+      name.addEventListener("click", () => {
+        currentProject = projectName;
+        refreshPageElements();
+      })
+
+      const editButton = document.createElement("button");
+      editButton.textContent = "E";
+      editButton.addEventListener("click", () => {
+        const newName = prompt("New Name:", currentProject);
+        editProjectNameFunction(currentProject, newName);
+        currentProject = newName;
+        refreshPageElements();
+      });
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "D";
+      deleteButton.addEventListener("click", () => {
+        deleteProjectFunction(currentProject);
+        currentProject = getProjectNamesFunction()[0];
+        refreshPageElements();
+      });
+
+      projectDiv.append(name, editButton, deleteButton);
+      projectList.appendChild(projectDiv);
     });
-    select.addEventListener("change", (event) => {
-      currentProject = event.target.value;
-      refreshPageElements();
-    });
-    select.value = currentProject;
-    container.appendChild(label);
-    container.appendChild(select);
-    return container;
+    return projectList;
   };
 
   const createSideBar = () => {
     const sidebar = document.createElement("div");
     sidebar.classList.add("sidebar");
+    sidebar.appendChild(addProjectsListing());
     sidebar.appendChild(createAddProjectButton());
-    sidebar.appendChild(createEditProjectButton());
-    sidebar.appendChild(createDeleteProjectButton());
-    sidebar.appendChild(createChangeProjectElements());
     return sidebar;
   };
 
