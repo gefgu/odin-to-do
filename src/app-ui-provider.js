@@ -86,8 +86,6 @@ export default (() => {
     });
     return button;
   };
-
-  
   const createAddProjectButton = () => {
     const button = document.createElement("button");
     button.textContent = "Add Project";
@@ -104,27 +102,30 @@ export default (() => {
     const projectList = document.createElement("div");
     getProjectNamesFunction().forEach((projectName) => {
       const projectDiv = document.createElement("div");
+      projectDiv.classList.add("project-navigation");
 
       const name = document.createElement("span");
       name.textContent = projectName;
-      name.addEventListener("click", () => {
+      projectDiv.addEventListener("click", () => {
         currentProject = projectName;
         refreshPageElements();
-      })
+      });
 
       const editButton = document.createElement("button");
       editButton.textContent = "E";
       editButton.addEventListener("click", () => {
-        const newName = prompt("New Name:", currentProject);
-        editProjectNameFunction(currentProject, newName);
-        currentProject = newName;
-        refreshPageElements();
+        const newName = prompt("New Name:", projectName);
+        if (newName && newName != projectName) {
+          editProjectNameFunction(projectName, newName);
+          currentProject = newName;
+          refreshPageElements();
+        }
       });
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "D";
       deleteButton.addEventListener("click", () => {
-        deleteProjectFunction(currentProject);
+        deleteProjectFunction(projectName);
         currentProject = getProjectNamesFunction()[0];
         refreshPageElements();
       });
