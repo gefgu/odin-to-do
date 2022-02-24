@@ -17,7 +17,8 @@ export default (() => {
     const container = document.createElement("div");
     container.classList.add("heading");
     const heading = document.createElement("h1");
-    heading.textContent = currentProject.toUpperCase();
+    heading.textContent = currentProject;
+    heading.classList.add("project-name");
     container.appendChild(heading);
     return container;
   };
