@@ -98,6 +98,7 @@ export default (() => {
       currentProject = name;
       refreshPageElements();
     });
+    button.classList.add("add-project");
     return button;
   };
 

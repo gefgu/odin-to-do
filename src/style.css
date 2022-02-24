@@ -11,7 +11,9 @@ body {
 
 .sidebar {
   padding: 16px 0;
-  border-right: 1px solid red;
+  border-right: 1px solid black;
+  display: grid;
+  grid-template-rows: 1fr 75px;
 }
 
 .project-navigation {
@@ -35,6 +37,12 @@ body {
   border: none;
   padding: 4px;
   border-radius: 16px;
+}
+
+.add-project {
+  border: none;
+  border-radius: 4px;
+  margin: 16px;
 }
 
 .content {
