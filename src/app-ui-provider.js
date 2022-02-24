@@ -68,8 +68,7 @@ export default (() => {
 
   const editToDoButton = (index) => {
     const toDos = getToDosFromProject();
-    const button = document.createElement("button");
-    button.textContent = "Edit";
+    const button = createEditButton();
     button.addEventListener("click", () => {
       const title = prompt("Title:", toDos[index].title);
       const description = prompt("Description:", toDos[index].description);
@@ -82,8 +81,7 @@ export default (() => {
   };
 
   const removeToDoButton = (index) => {
-    const button = document.createElement("button");
-    button.textContent = "Remove To-Do";
+    const button = createDeleteButton();
     button.addEventListener("click", () => {
       removeToDoFunction(index);
       refreshPageElements();
@@ -103,6 +101,24 @@ export default (() => {
     return button;
   };
 
+  const createEditButton = () => {
+    const editButton = document.createElement("button");
+    const editImage = new Image();
+    editImage.src = editIcon;
+    editButton.appendChild(editImage);
+
+    return editButton;
+  };
+
+  const createDeleteButton = () => {
+    const deleteButton = document.createElement("button");
+    const deleteImage = new Image();
+    deleteImage.src = deleteIcon;
+    deleteButton.appendChild(deleteImage);
+
+    return deleteButton;
+  };
+
   const addProjectsListing = () => {
     const projectList = document.createElement("div");
     getProjectNamesFunction().forEach((projectName) => {
@@ -116,10 +132,7 @@ export default (() => {
         refreshPageElements();
       });
 
-      const editButton = document.createElement("button");
-      const editImage = new Image();
-      editImage.src = editIcon;
-      editButton.appendChild(editImage);
+      const editButton = createEditButton();
       editButton.addEventListener("click", (e) => {
         const newName = prompt("New Name:", projectName);
         if (newName && newName != projectName) {
@@ -130,10 +143,7 @@ export default (() => {
         }
       });
 
-      const deleteButton = document.createElement("button");
-      const deleteImage = new Image();
-      deleteImage.src = deleteIcon;
-      deleteButton.appendChild(deleteImage);
+      const deleteButton = createDeleteButton();
       deleteButton.addEventListener("click", (e) => {
         deleteProjectFunction(projectName);
         currentProject = getProjectNamesFunction()[0];
