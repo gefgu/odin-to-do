@@ -118,12 +118,13 @@ export default (() => {
       const editImage = new Image();
       editImage.src = editIcon;
       editButton.appendChild(editImage);
-      editButton.addEventListener("click", () => {
+      editButton.addEventListener("click", (e) => {
         const newName = prompt("New Name:", projectName);
         if (newName && newName != projectName) {
           editProjectNameFunction(projectName, newName);
           currentProject = newName;
           refreshPageElements();
+          e.stopPropagation();
         }
       });
 
@@ -131,10 +132,11 @@ export default (() => {
       const deleteImage = new Image();
       deleteImage.src = deleteIcon;
       deleteButton.appendChild(deleteImage);
-      deleteButton.addEventListener("click", () => {
+      deleteButton.addEventListener("click", (e) => {
         deleteProjectFunction(projectName);
         currentProject = getProjectNamesFunction()[0];
         refreshPageElements();
+        e.stopPropagation();
       });
 
       projectDiv.append(name, editButton, deleteButton);
