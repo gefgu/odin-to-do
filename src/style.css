@@ -17,7 +17,7 @@ body {
 .project-navigation {
   display: grid;
   grid-template-columns: 1fr 50px 50px;
-  padding: 8px 16px;
+  padding: 16px;
   margin: 8px 0;
 }
 
