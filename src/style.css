@@ -18,7 +18,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 50px 50px;
   padding: 16px;
-  margin: 8px 0;
+  align-items: center;
+  gap: 8px;
 }
 
 .project-navigation:hover {
@@ -27,6 +28,11 @@ body {
 
 .project-navigation:active {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.project-navigation button {
+  border: none;
+  padding: 4px;
 }
 
 .content {

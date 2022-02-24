@@ -1,3 +1,6 @@
+import deleteIcon from "./delete.svg";
+import editIcon from "./edit.svg";
+
 export default (() => {
   const page = document.querySelector("body");
   let getToDosFromProject = null;
@@ -112,7 +115,9 @@ export default (() => {
       });
 
       const editButton = document.createElement("button");
-      editButton.textContent = "E";
+      const editImage = new Image();
+      editImage.src = editIcon;
+      editButton.appendChild(editImage);
       editButton.addEventListener("click", () => {
         const newName = prompt("New Name:", projectName);
         if (newName && newName != projectName) {
@@ -123,7 +128,9 @@ export default (() => {
       });
 
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "D";
+      const deleteImage = new Image();
+      deleteImage.src = deleteIcon;
+      deleteButton.appendChild(deleteImage);
       deleteButton.addEventListener("click", () => {
         deleteProjectFunction(projectName);
         currentProject = getProjectNamesFunction()[0];
