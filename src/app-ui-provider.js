@@ -26,11 +26,10 @@ export default (() => {
   const createToDoElement = (toDo, index, container) => {
     const toDoContainer = document.createElement("div");
 
-    Object.keys(toDo).forEach((propertyName) => {
-      const element = document.createElement("p");
-      element.textContent = toDo[propertyName];
-      toDoContainer.appendChild(element);
-    });
+    const element = document.createElement("p");
+    element.textContent = toDo["title"];
+    element.classList.add("to-do-title");
+    toDoContainer.appendChild(element);
 
     toDoContainer.appendChild(editToDoButton(index));
     toDoContainer.appendChild(removeToDoButton(index));
