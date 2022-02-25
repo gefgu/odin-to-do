@@ -88,3 +88,53 @@ body {
 .to-do-list button img {
   width: 30px;
 }
+
+.to-do-form {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  padding: 24px;
+  width: 350px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+}
+
+.to-do-form input {
+  margin-bottom: 24px;
+  font-size: 18px;
+  padding: 16px;
+  background-color: #f4f4f4;
+  border: none;
+  line-height: 1.5em;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.to-do-form label {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.exit {
+  width: 25px;
+  text-align: center;
+  margin-left: auto;
+  font-size: 24px;
+  padding: 4px 4px 0px 4px;
+}
+
+.to-do-form h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.to-do-form #input  {
+  margin-bottom: 0;
+  padding: 16px 8px;
+  font-size: 1.5rem;
+}

@@ -43,8 +43,10 @@ export default (() => {
     const dateArea = createFormInputArea("dueDate", "date");
     const priorityArea = createFormInputArea("priority", "text", "Priority...");
 
-    const submitButton = document.createElement("button");
-    submitButton.textContent = "Submit";
+    const submitButton = document.createElement("input");
+    submitButton.type = "submit";
+    submitButton.value = "Submit";
+    submitButton.id = "submit";
 
     form.append(
       exitButton,
@@ -62,6 +64,7 @@ export default (() => {
     const wrapper = document.createElement("div");
     const label = document.createElement("label");
     label.htmlFor = id;
+    label.textContent = `${id}:`;
     const input = document.createElement("input");
     input.type = type;
     input.name = id;
