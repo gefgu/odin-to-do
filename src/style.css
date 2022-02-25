@@ -52,6 +52,12 @@ body {
   margin-top: 0;
 }
 
+.create-to-do {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
 .content {
   padding: 16px;
 }

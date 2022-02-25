@@ -53,7 +53,7 @@ export default (() => {
 
   const createAddToDoButton = () => {
     const button = document.createElement("button");
-    button.textContent = "Add ToDo";
+    button.textContent = "Add To-Do";
     button.addEventListener("click", () => {
       const title = prompt("Title:");
       const description = prompt("Description:");
@@ -62,6 +62,7 @@ export default (() => {
       addToDoFunction(title, description, dueDate, priority);
       refreshPageElements();
     });
+    button.classList.add("create-to-do");
     return button;
   };
 
