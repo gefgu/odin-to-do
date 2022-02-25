@@ -23,6 +23,57 @@ export default (() => {
     return container;
   };
 
+  const buildToDoForm = () => {
+    const form = document.createElement("form");
+    form.classList.add("to-do-form");
+
+    const exitButton = document.createElement("div");
+    exitButton.classList.add("exit");
+    exitButton.textContent = "X";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "To-Do Form";
+
+    const titleArea = createFormInputArea("title", "text", "To-Do Title");
+    const descriptionArea = createFormInputArea(
+      "description",
+      "textarea",
+      "Add Description..."
+    );
+    const dateArea = createFormInputArea("dueDate", "date");
+    const priorityArea = createFormInputArea("priority", "text", "Priority...");
+
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+
+    form.append(
+      exitButton,
+      heading,
+      titleArea,
+      descriptionArea,
+      dateArea,
+      priorityArea,
+      submitButton
+    );
+    page.appendChild(form);
+  };
+
+  const createFormInputArea = (id, type, placeholder) => {
+    const wrapper = document.createElement("div");
+    const label = document.createElement("label");
+    label.htmlFor = id;
+    const input = document.createElement("input");
+    input.type = type;
+    input.name = id;
+    input.id = id;
+    if (placeholder) {
+      input.placeholder = placeholder;
+    }
+    input.required = true;
+    wrapper.append(label, input);
+    return wrapper;
+  };
+
   const createToDoElement = (toDo, index, container) => {
     const toDoContainer = document.createElement("div");
 
@@ -55,12 +106,7 @@ export default (() => {
     const button = document.createElement("button");
     button.textContent = "Add To-Do";
     button.addEventListener("click", () => {
-      const title = prompt("Title:");
-      const description = prompt("Description:");
-      const dueDate = prompt("Due Date:");
-      const priority = prompt("Priority:");
-      addToDoFunction(title, description, dueDate, priority);
-      refreshPageElements();
+      buildToDoForm();
     });
     button.classList.add("create-to-do");
     return button;
