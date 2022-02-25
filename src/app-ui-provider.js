@@ -23,12 +23,17 @@ export default (() => {
     return container;
   };
 
+  const removeToDoForm = () => {
+    document.querySelector(".to-do-form").remove();
+  }
+
   const buildToDoForm = () => {
     const form = document.createElement("form");
     form.classList.add("to-do-form");
 
     const exitButton = document.createElement("div");
     exitButton.classList.add("exit");
+    exitButton.addEventListener("click", removeToDoForm);
     exitButton.textContent = "X";
 
     const heading = document.createElement("h3");
@@ -37,7 +42,7 @@ export default (() => {
     const titleArea = createFormInputArea("title", "text", "To-Do Title");
     const descriptionArea = createFormInputArea(
       "description",
-      "textarea",
+      "text",
       "Add Description..."
     );
     const dateArea = createFormInputArea("dueDate", "date");
