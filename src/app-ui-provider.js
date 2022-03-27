@@ -12,6 +12,7 @@ export default (() => {
   let editProjectNameFunction = null;
   let deleteProjectFunction = null;
   let currentProject = null;
+  let formClass = "to-do-form";
 
   const createHeading = () => {
     const container = document.createElement("div");
@@ -24,12 +25,12 @@ export default (() => {
   };
 
   const removeToDoForm = () => {
-    document.querySelector(".to-do-form").remove();
+    document.querySelector(`.${formClass}`).remove();
   };
 
   const buildToDoForm = () => {
     const form = document.createElement("form");
-    form.classList.add("to-do-form");
+    form.classList.add(formClass);
 
     const exitButton = document.createElement("div");
     exitButton.classList.add("exit");
@@ -64,6 +65,16 @@ export default (() => {
     );
 
     page.appendChild(form);
+  };
+
+  const addToDoDataInForm = (index) => {
+    const form = document.querySelector(`.${formClass}`);
+    const toDos = getToDosFromProject();
+
+    form.elements["title"].value = toDos[index].title;
+    form.elements["description"].value = toDos[index].description;
+    form.elements["dueDate"].value = toDos[index].dueDate;
+    form.elements["priority"].value = toDos[index].priority;
   };
 
   const addToDoFromForm = (event, form) => {
@@ -129,7 +140,7 @@ export default (() => {
     button.textContent = "Add To-Do";
     button.addEventListener("click", () => {
       buildToDoForm();
-      const form = document.querySelector(".to-do-form");
+      const form = document.querySelector(`.${formClass}`);
       form.addEventListener("submit", (event) => {
         addToDoFromForm(event, form);
       });
@@ -142,12 +153,8 @@ export default (() => {
     const toDos = getToDosFromProject();
     const button = createEditButton();
     button.addEventListener("click", () => {
-      const title = prompt("Title:", toDos[index].title);
-      const description = prompt("Description:", toDos[index].description);
-      const dueDate = prompt("Due Date:", toDos[index].dueDate);
-      const priority = prompt("Priority:", toDos[index].priority);
-      editToDoFunction(index, title, description, dueDate, priority);
-      refreshPageElements();
+      buildToDoForm();
+      addToDoDataInForm(index);
     });
     return button;
   };
