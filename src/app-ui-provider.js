@@ -189,6 +189,9 @@ export default (() => {
     button.textContent = "Add Project";
     button.addEventListener("click", () => {
       const name = prompt("Name");
+      if (!name) {
+        return;
+      }
       addProjectFunction(name);
       currentProject = name;
       refreshPageElements();
