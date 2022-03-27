@@ -93,6 +93,7 @@ body {
   background-color: white;
   border: 2px solid black;
   border-radius: 4px;
+  font-size: 2rem;
 }
 
 .to-do-list .to-do-status:hover {

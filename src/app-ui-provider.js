@@ -97,7 +97,14 @@ export default (() => {
     const dueDate = form.elements["dueDate"].value;
     const priority = form.elements["priority"].value;
 
-    editToDoFunction(index, title, description, dueDate, priority, toDos[index].doneStatus);
+    editToDoFunction(
+      index,
+      title,
+      description,
+      dueDate,
+      priority,
+      toDos[index].doneStatus
+    );
 
     removeToDoForm();
     refreshPageElements();
@@ -126,11 +133,12 @@ export default (() => {
 
     const toDoStatus = document.createElement("button");
     toDoStatus.classList.add("to-do-status");
-    if (!toDo.doneStatus) {
-      toDoStatus.classList.add("to-do");
-    } else {
-      toDoStatus.classList.add("done");
+    if (toDo.doneStatus) {
+      toDoStatus.textContent = "X";
     }
+    toDoStatus.addEventListener("click", () => {
+      toggleToDoStatus(index);
+    });
     toDoContainer.appendChild(toDoStatus);
 
     const toDoTitle = document.createElement("p");
@@ -141,6 +149,19 @@ export default (() => {
     toDoContainer.appendChild(editToDoButton(index));
     toDoContainer.appendChild(removeToDoButton(index));
     container.appendChild(toDoContainer);
+  };
+
+  const toggleToDoStatus = (index) => {
+    const toDos = getToDosFromProject();
+    const selectedToDo = toDos[index];
+    const title = selectedToDo.title;
+    const description = selectedToDo.description;
+    const dueDate = selectedToDo.dueDate;
+    const priority = selectedToDo.priority;
+    const doneStatus = selectedToDo.doneStatus;
+
+    editToDoFunction(index, title, description, dueDate, priority, !doneStatus);
+    refreshPageElements();
   };
 
   const createToDosElements = () => {
