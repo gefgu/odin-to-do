@@ -91,12 +91,13 @@ export default (() => {
   };
 
   const editToDoFromForm = (event, form, index) => {
+    const toDos = getToDosFromProject();
     const title = form.elements["title"].value;
     const description = form.elements["description"].value;
     const dueDate = form.elements["dueDate"].value;
     const priority = form.elements["priority"].value;
 
-    editToDoFunction(index, title, description, dueDate, priority);
+    editToDoFunction(index, title, description, dueDate, priority, toDos[index].doneStatus);
 
     removeToDoForm();
     refreshPageElements();
