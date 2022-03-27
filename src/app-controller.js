@@ -33,7 +33,7 @@ export default (() => {
   const addToDo = (projectName, title, description, dueDate, priority) => {
     projects[projectName]
       .getToDos()
-      .splice(0, 0, todoFactory(title, description, dueDate, priority));
+      .splice(0, 0, todoFactory(title, description, dueDate, priority, false));
     saveData();
   };
 
@@ -48,11 +48,16 @@ export default (() => {
     title,
     description,
     dueDate,
-    priority
+    priority,
+    doneStatus
   ) => {
     projects[projectName]
       .getToDos()
-      .splice(index, 1, todoFactory(title, description, dueDate, priority));
+      .splice(
+        index,
+        1,
+        todoFactory(title, description, dueDate, priority, doneStatus)
+      );
     saveData();
   };
 
@@ -63,12 +68,12 @@ export default (() => {
   };
 
   const getSavedData = () => {
-    Object.keys(localStorage).forEach(projectName => {
+    Object.keys(localStorage).forEach((projectName) => {
       const project = projectFactory(projectName);
       const toDos = JSON.parse(localStorage[projectName]);
-      toDos.forEach(toDo => project.addToDo(toDo));
+      toDos.forEach((toDo) => project.addToDo(toDo));
       projects[projectName] = project;
-    })
+    });
   };
 
   getSavedData();

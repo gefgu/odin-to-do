@@ -1,3 +1,9 @@
-export default function todoFactory(title, description, dueDate, priority) {
-  return { title, description, dueDate, priority };
+export default function todoFactory(
+  title,
+  description,
+  dueDate,
+  priority,
+  doneStatus
+) {
+  return { title, description, dueDate, priority, doneStatus };
 }

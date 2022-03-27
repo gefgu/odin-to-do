@@ -101,7 +101,7 @@ export default (() => {
     removeToDoForm();
     refreshPageElements();
     event.preventDefault();
-  }
+  };
 
   const createFormInputArea = (id, type, placeholder) => {
     const wrapper = document.createElement("div");
@@ -306,14 +306,22 @@ export default (() => {
     removeToDoFunction = (index) => {
       removeFunction(currentProject, index);
     };
-    editToDoFunction = (index, title, description, dueDate, priority) => {
+    editToDoFunction = (
+      index,
+      title,
+      description,
+      dueDate,
+      priority,
+      doneStatus
+    ) => {
       editFunction(
         currentProject,
         index,
         title,
         description,
         dueDate,
-        priority
+        priority,
+        doneStatus
       );
     };
     currentProject = getProjectNamesFunction()[0];
