@@ -90,6 +90,19 @@ export default (() => {
     event.preventDefault();
   };
 
+  const editToDoFromForm = (event, form, index) => {
+    const title = form.elements["title"].value;
+    const description = form.elements["description"].value;
+    const dueDate = form.elements["dueDate"].value;
+    const priority = form.elements["priority"].value;
+
+    editToDoFunction(index, title, description, dueDate, priority);
+
+    removeToDoForm();
+    refreshPageElements();
+    event.preventDefault();
+  }
+
   const createFormInputArea = (id, type, placeholder) => {
     const wrapper = document.createElement("div");
     const label = document.createElement("label");
@@ -155,6 +168,10 @@ export default (() => {
     button.addEventListener("click", () => {
       buildToDoForm();
       addToDoDataInForm(index);
+      const form = document.querySelector(`.${formClass}`);
+      form.addEventListener("submit", (event) => {
+        editToDoFromForm(event, form, index);
+      });
     });
     return button;
   };
