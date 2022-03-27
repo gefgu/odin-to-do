@@ -124,10 +124,19 @@ export default (() => {
   const createToDoElement = (toDo, index, container) => {
     const toDoContainer = document.createElement("div");
 
-    const element = document.createElement("p");
-    element.textContent = toDo["title"];
-    element.classList.add("to-do-title");
-    toDoContainer.appendChild(element);
+    const toDoStatus = document.createElement("button");
+    toDoStatus.classList.add("to-do-status");
+    if (!toDo.doneStatus) {
+      toDoStatus.classList.add("to-do");
+    } else {
+      toDoStatus.classList.add("done");
+    }
+    toDoContainer.appendChild(toDoStatus);
+
+    const toDoTitle = document.createElement("p");
+    toDoTitle.textContent = toDo["title"];
+    toDoTitle.classList.add("to-do-title");
+    toDoContainer.appendChild(toDoTitle);
 
     toDoContainer.appendChild(editToDoButton(index));
     toDoContainer.appendChild(removeToDoButton(index));
