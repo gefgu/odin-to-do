@@ -74,6 +74,9 @@ export default (() => {
       toDos.forEach((toDo) => project.addToDo(toDo));
       projects[projectName] = project;
     });
+    if (Object.keys(projects).length === 0) {
+      projects["Inbox"] = projectFactory("Inbox");
+    }
   };
 
   getSavedData();
