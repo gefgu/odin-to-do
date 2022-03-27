@@ -173,7 +173,6 @@ export default (() => {
   };
 
   const editToDoButton = (index) => {
-    const toDos = getToDosFromProject();
     const button = createEditButton();
     button.addEventListener("click", () => {
       buildToDoForm();
