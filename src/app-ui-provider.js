@@ -63,10 +63,6 @@ export default (() => {
       submitButton
     );
 
-    form.addEventListener("submit", (event) => {
-      addToDoFromForm(event, form);
-    });
-
     page.appendChild(form);
   };
 
@@ -75,7 +71,7 @@ export default (() => {
     const description = form.elements["description"].value;
     const dueDate = form.elements["dueDate"].value;
     const priority = form.elements["priority"].value;
-    
+
     addToDoFunction(title, description, dueDate, priority);
 
     removeToDoForm();
@@ -133,6 +129,10 @@ export default (() => {
     button.textContent = "Add To-Do";
     button.addEventListener("click", () => {
       buildToDoForm();
+      const form = document.querySelector(".to-do-form");
+      form.addEventListener("submit", (event) => {
+        addToDoFromForm(event, form);
+      });
     });
     button.classList.add("create-to-do");
     return button;
