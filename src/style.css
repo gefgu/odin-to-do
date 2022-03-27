@@ -68,7 +68,7 @@ body {
 
 .to-do-list > div {
   display: grid;
-  grid-template-columns: 1fr repeat(2, 75px);
+  grid-template-columns: 60px 1fr repeat(2, 75px);
   align-items: center;
   gap: 32px;
   padding: 16px 0;
@@ -87,6 +87,20 @@ body {
 
 .to-do-list button img {
   width: 30px;
+}
+
+.to-do-list .to-do-status {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.to-do-list .to-do-status:hover {
+  background-color: #f4f4f4;
+}
+
+.to-do-list .to-do-status:active {
+  background-color: #dedede;
 }
 
 .to-do-form {
