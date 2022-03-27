@@ -41,7 +41,7 @@ export default (() => {
     heading.textContent = "To-Do Form";
 
     const titleArea = createFormInputArea("title", "text", "To-Do Title");
-    const descriptionArea = createFormInputArea(
+    const descriptionArea = createFormTextArea(
       "description",
       "text",
       "Add Description..."
@@ -118,6 +118,22 @@ export default (() => {
     label.textContent = `${id}:`;
     const input = document.createElement("input");
     input.type = type;
+    input.name = id;
+    input.id = id;
+    if (placeholder) {
+      input.placeholder = placeholder;
+    }
+    input.required = true;
+    wrapper.append(label, input);
+    return wrapper;
+  };
+
+  const createFormTextArea = (id, placeholder) => {
+    const wrapper = document.createElement("div");
+    const label = document.createElement("label");
+    label.htmlFor = id;
+    label.textContent = `${id}:`;
+    const input = document.createElement("textarea");
     input.name = id;
     input.id = id;
     if (placeholder) {

@@ -114,11 +114,11 @@ body {
   margin-right: auto;
   background-color: white;
   padding: 24px;
-  width: 350px;
+  width: 40%;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
 }
 
-.to-do-form input {
+.to-do-form input, .to-do-form textarea {
   margin-bottom: 24px;
   font-size: 18px;
   padding: 16px;
@@ -128,6 +128,11 @@ body {
   box-sizing: border-box;
   border-radius: 4px;
   width: 100%;
+}
+
+.to-do-form textarea {
+  resize: none;
+  height: 200px;
 }
 
 .to-do-form label {
