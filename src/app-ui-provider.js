@@ -157,10 +157,19 @@ export default (() => {
     });
     toDoContainer.appendChild(toDoStatus);
 
+    const toDoDataContainer = document.createElement("div");
+
     const toDoTitle = document.createElement("p");
     toDoTitle.textContent = toDo["title"];
     toDoTitle.classList.add("to-do-title");
-    toDoContainer.appendChild(toDoTitle);
+    toDoDataContainer.appendChild(toDoTitle);
+
+    const toDoDueDate = document.createElement("p");
+    toDoDueDate.textContent = `Due Date: ${toDo.dueDate}`;
+    toDoDueDate.classList.add("to-do-due-date");
+    toDoDataContainer.appendChild(toDoDueDate);
+
+    toDoContainer.appendChild(toDoDataContainer);
 
     toDoContainer.appendChild(editToDoButton(index));
     toDoContainer.appendChild(removeToDoButton(index));
