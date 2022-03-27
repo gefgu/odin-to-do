@@ -25,7 +25,7 @@ export default (() => {
 
   const removeToDoForm = () => {
     document.querySelector(".to-do-form").remove();
-  }
+  };
 
   const buildToDoForm = () => {
     const form = document.createElement("form");
@@ -62,7 +62,25 @@ export default (() => {
       priorityArea,
       submitButton
     );
+
+    form.addEventListener("submit", (event) => {
+      addToDoFromForm(event, form);
+    });
+
     page.appendChild(form);
+  };
+
+  const addToDoFromForm = (event, form) => {
+    const title = form.elements["title"].value;
+    const description = form.elements["description"].value;
+    const dueDate = form.elements["dueDate"].value;
+    const priority = form.elements["priority"].value;
+    
+    addToDoFunction(title, description, dueDate, priority);
+
+    removeToDoForm();
+    refreshPageElements();
+    event.preventDefault();
   };
 
   const createFormInputArea = (id, type, placeholder) => {
